@@ -69,7 +69,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css?v=4.0">
+    <link rel="stylesheet" href="css/styles.css?v=5.0">
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -233,25 +233,39 @@
                 <span></span>
             </button>
         </div>
-        <!-- Nouveau Menu Mobile Moderne -->
+        <!-- Menu Mobile Premium -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
         <div class="mobile-menu" id="mobileMenu">
-            <div class="mobile-menu-header">
-                <div class="mobile-menu-brand">
-                    <img src="images/logo.png" alt="IVOIRE.AI" class="mobile-logo" onerror="this.style.display='none';">
-                    <span class="mobile-brand-text">IVOIRE.AI</span>
-                </div>
-                <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Fermer le menu">
-                    <span></span>
-                    <span></span>
-                </button>
+            <div class="mobile-menu-close-btn" id="mobileMenuClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
             </div>
-            <nav class="mobile-menu-nav">
-                <a href="#accueil" class="mobile-menu-link">Accueil</a>
-                <a href="#services" class="mobile-menu-link">Services</a>
-                <a href="#apropos" class="mobile-menu-link">À propos</a>
-                <a href="#contact" class="mobile-menu-link">Contact</a>
-            </nav>
+            <div class="mobile-menu-content">
+                <div class="mobile-menu-logo">
+                    <img src="images/logo.png" alt="IVOIRE.AI" onerror="this.style.display='none';">
+                    <h2>IVOIRE.AI</h2>
+                </div>
+                <nav class="mobile-menu-nav">
+                    <a href="#accueil" class="mobile-nav-item">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Accueil</span>
+                    </a>
+                    <a href="#services" class="mobile-nav-item">
+                        <span class="nav-icon">⚡</span>
+                        <span class="nav-text">Services</span>
+                    </a>
+                    <a href="#apropos" class="mobile-nav-item">
+                        <span class="nav-icon">💡</span>
+                        <span class="nav-text">À propos</span>
+                    </a>
+                    <a href="#contact" class="mobile-nav-item">
+                        <span class="nav-icon">📧</span>
+                        <span class="nav-text">Contact</span>
+                    </a>
+                </nav>
+            </div>
         </div>
         </div>
     </nav>

@@ -16,19 +16,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Nouveau Menu Mobile Moderne - Variables
+// Menu Mobile Premium - Variables
 const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.getElementById('mobileMenu');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const mobileMenuClose = document.getElementById('mobileMenuClose');
-const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+const mobileMenuLinks = document.querySelectorAll('.mobile-nav-item');
 
 // Fonction pour ouvrir le menu
 function openMobileMenu() {
     if (mobileMenu && mobileMenuOverlay) {
         document.body.style.overflow = 'hidden';
         mobileMenuOverlay.classList.add('active');
-        mobileMenu.classList.add('active');
+        setTimeout(() => {
+            mobileMenu.classList.add('active');
+        }, 50);
         
         // Animer le bouton hamburger
         if (navToggle) {
@@ -45,9 +47,11 @@ function openMobileMenu() {
 // Fonction pour fermer le menu
 function closeMobileMenu() {
     if (mobileMenu && mobileMenuOverlay) {
-        document.body.style.overflow = '';
-        mobileMenuOverlay.classList.remove('active');
         mobileMenu.classList.remove('active');
+        setTimeout(() => {
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 300);
         
         // Réinitialiser le bouton hamburger
         if (navToggle) {
