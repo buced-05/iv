@@ -23,12 +23,12 @@ const navMenu = document.querySelector('.nav-menu');
 
 function toggleMobileMenu() {
     if (navMenu) {
-        navMenu.classList.toggle('active');
+        navMenu.classList.toggle('hidden');
         
         // Animate hamburger icon
         const spans = navToggle?.querySelectorAll('span');
         if (spans) {
-            if (navMenu.classList.contains('active')) {
+            if (!navMenu.classList.contains('hidden')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
@@ -50,7 +50,7 @@ if (navMenu) {
     const navLinks = navMenu.querySelectorAll('a');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+            navMenu.classList.add('hidden');
             const spans = navToggle?.querySelectorAll('span');
             if (spans) {
                 spans[0].style.transform = 'none';
@@ -66,8 +66,8 @@ document.addEventListener('click', (e) => {
     if (navMenu && navToggle && 
         !navMenu.contains(e.target) && 
         !navToggle.contains(e.target) &&
-        navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
+        !navMenu.classList.contains('hidden')) {
+        navMenu.classList.add('hidden');
         const spans = navToggle.querySelectorAll('span');
         spans[0].style.transform = 'none';
         spans[1].style.opacity = '1';
