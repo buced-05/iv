@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Google Analytics - IVOIRE.AI</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2KEHW1R278"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2KEHW1R278', {
+        'page_path': window.location.pathname + window.location.search,
+        'page_title': document.title,
+        'send_page_view': true
+      });
+      
+      // Test event
+      gtag('event', 'page_view', {
+        'event_category': 'test',
+        'event_label': 'Test page loaded'
+      });
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0F0F1E;
+            color: #fff;
+        }
+        .test-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        button {
+            background: #F39C12;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+        button:hover { background: #E67E22; }
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Test Google Analytics - IVOIRE.AI</h1>
+    
+    <div class="test-box">
+        <h2>Vérification du code Google Analytics</h2>
+        <div id="ga-status"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Actions de test</h2>
+        <button onclick="testPageView()">Tester Page View</button>
+        <button onclick="testEvent()">Tester Event</button>
+        <button onclick="checkDataLayer()">Vérifier DataLayer</button>
+        <div id="test-result"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Instructions</h2>
+        <ol>
+            <li>Ouvrez la console du navigateur (F12)</li>
+            <li>Vérifiez qu'il n'y a pas d'erreurs</li>
+            <li>Dans Google Analytics, allez dans Admin > Data Streams</li>
+            <li>Cliquez sur votre stream web</li>
+            <li>Vérifiez "Tag installation" - il devrait montrer "Receiving data"</li>
+            <li>Attendez 24-48h pour voir les données dans les rapports</li>
+        </ol>
+    </div>
+
+    <script>
+        // Vérifier si Google Analytics est chargé
+        function checkGA() {
+            const statusDiv = document.getElementById('ga-status');
+            
+            if (typeof gtag !== 'undefined' && typeof dataLayer !== 'undefined') {
+                statusDiv.innerHTML = '<p class="success">✅ Google Analytics est chargé correctement!</p>';
+                statusDiv.innerHTML += '<p>DataLayer: ' + dataLayer.length + ' entrées</p>';
+            } else {
+                statusDiv.innerHTML = '<p class="error">❌ Google Analytics n\'est pas chargé</p>';
+            }
+        }
+        
+        function testPageView() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'event_category': 'test',
+                    'event_label': 'Manual test page view'
+                });
+                document.getElementById('test-result').innerHTML = '<p class="success">✅ Page view envoyé!</p>';
+            } else {
+                document.getElementById('test-result').innerHTML = '<p class="error">❌ Google Analytics non disponible</p>';
+            }
+        }
+        
+        function testEvent() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'test_event', {
+                    'event_category': 'test',
+                    'event_label': 'Test button clicked',
+                    'value': 1
+                });
+                document.getElementById('test-result').innerHTML = '<p class="success">✅ Event envoyé!</p>';
+            } else {
+                document.getElementById('test-result').innerHTML = '<p class="error">❌ Google Analytics non disponible</p>';
+            }
+        }
+        
+        function checkDataLayer() {
+            const result = document.getElementById('test-result');
+            if (typeof dataLayer !== 'undefined') {
+                result.innerHTML = '<p class="success">✅ DataLayer disponible</p><pre>' + JSON.stringify(dataLayer, null, 2) + '</pre>';
+            } else {
+                result.innerHTML = '<p class="error">❌ DataLayer non disponible</p>';
+            }
+        }
+        
+        // Vérifier au chargement
+        window.addEventListener('load', () => {
+            setTimeout(checkGA, 1000);
+        });
+        
+        // Afficher les infos dans la console
+        console.log('Google Analytics Test Page');
+        console.log('gtag disponible:', typeof gtag !== 'undefined');
+        console.log('dataLayer disponible:', typeof dataLayer !== 'undefined');
+        if (typeof dataLayer !== 'undefined') {
+            console.log('DataLayer:', dataLayer);
+        }
+    </script>
+</body>
+</html>
+
