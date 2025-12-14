@@ -276,15 +276,27 @@ document.addEventListener('DOMContentLoaded', () => {
         navBrand.style.opacity = '1';
     }
     
-    // S'assurer que le bouton hamburger est visible sur mobile
-    if (window.innerWidth <= 968) {
+    // S'assurer que le bouton hamburger est visible UNIQUEMENT sur mobile
+    function updateNavToggleVisibility() {
         if (navToggle) {
-            navToggle.style.display = 'flex';
-            navToggle.style.visibility = 'visible';
-            navToggle.style.opacity = '1';
-            navToggle.style.pointerEvents = 'auto';
+            if (window.innerWidth <= 968) {
+                // Mobile : afficher le bouton
+                navToggle.style.display = 'flex';
+                navToggle.style.visibility = 'visible';
+                navToggle.style.opacity = '1';
+                navToggle.style.pointerEvents = 'auto';
+            } else {
+                // Desktop : cacher le bouton
+                navToggle.style.display = 'none';
+                navToggle.style.visibility = 'hidden';
+                navToggle.style.opacity = '0';
+                navToggle.style.pointerEvents = 'none';
+            }
         }
     }
+    
+    // Initialiser la visibilité
+    updateNavToggleVisibility();
     
     // Écouter les changements de taille de fenêtre
     window.addEventListener('resize', () => {
@@ -295,16 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.style.opacity = '1';
         }
         
-        if (window.innerWidth <= 968) {
-            if (navToggle) {
-                navToggle.style.display = 'flex';
-                navToggle.style.visibility = 'visible';
-                navToggle.style.opacity = '1';
-            }
-        } else {
-            if (navToggle) {
-                navToggle.style.display = 'none';
-            }
-        }
+        // Mettre à jour la visibilité du bouton hamburger
+        updateNavToggleVisibility();
     });
 });

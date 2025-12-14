@@ -158,8 +158,11 @@ body {
     width: 100%;
 }
 
+/* Bouton hamburger - Caché sur desktop, visible uniquement sur mobile */
 .nav-toggle {
-    display: none;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
     flex-direction: column;
     background: rgba(243, 156, 18, 0.2);
     border: 2px solid var(--primary-color);
@@ -174,6 +177,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
+    pointer-events: none !important;
 }
 
 .nav-toggle:hover {
@@ -1246,6 +1250,16 @@ body {
     opacity: 0 !important;
 }
 
+/* Desktop - S'assurer que le bouton hamburger est caché */
+@media (min-width: 969px) {
+    .nav-toggle {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 968px) {
     .container {
@@ -1583,8 +1597,12 @@ body {
         font-size: 1.2rem;
     }
 
+    /* Bouton hamburger visible sur mobile uniquement */
     .nav-toggle {
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
         background: rgba(243, 156, 18, 0.2);
         border: 2px solid var(--primary-color);
         border-radius: 8px;
