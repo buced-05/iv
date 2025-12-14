@@ -108,8 +108,10 @@ body {
     display: block;
 }
 
-.brand-logo[style*="display: none"] + .brand-text {
-    display: inline-block !important;
+.brand-logo[style*="display: none"],
+.brand-logo:not([src]),
+img[src=""].brand-logo {
+    display: none !important;
 }
 
 .nav-brand .brand-text {
