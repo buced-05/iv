@@ -28,11 +28,25 @@ function toggleMobileMenu(event) {
     }
     
     if (navMenu) {
-        navMenu.classList.toggle('hidden');
+        const isHidden = navMenu.classList.contains('hidden');
+        
+        // Marquer que le menu est en train de s'ouvrir
+        if (isHidden) {
+            isMenuOpening = true;
+            navMenu.classList.remove('hidden');
+            
+            // Réinitialiser le flag après un court délai
+            setTimeout(() => {
+                isMenuOpening = false;
+            }, 500);
+        } else {
+            navMenu.classList.add('hidden');
+            isMenuOpening = false;
+        }
         
         // Animate hamburger icon
         const spans = navToggle?.querySelectorAll('span');
-        if (spans) {
+        if (spans && spans.length >= 3) {
             if (!navMenu.classList.contains('hidden')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
@@ -58,14 +72,21 @@ if (navToggle) {
 if (navMenu) {
     const navLinks = navMenu.querySelectorAll('a');
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.add('hidden');
-            const spans = navToggle?.querySelectorAll('span');
-            if (spans) {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
+        link.addEventListener('click', (e) => {
+            // Empêcher la propagation pour éviter la fermeture immédiate
+            e.stopPropagation();
+            // Petit délai pour permettre la navigation
+            setTimeout(() => {
+                if (navMenu) {
+                    navMenu.classList.add('hidden');
+                    const spans = navToggle?.querySelectorAll('span');
+                    if (spans && spans.length >= 3) {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                }
+            }, 300);
         });
     });
 }
