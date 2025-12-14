@@ -1226,8 +1226,25 @@ img[src=""].brand-logo {
     }
 
     .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .why-item {
+        padding: 1.75rem;
+        max-width: 100%;
+    }
+
+    .why-item h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .why-item p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        padding: 0;
     }
 }
 
@@ -1262,16 +1279,19 @@ img[src=""].brand-logo {
     }
 
     .hero-title {
-        font-size: clamp(2rem, 8vw, 3.5rem);
+        font-size: clamp(1.75rem, 7vw, 3rem);
         margin-bottom: 1rem;
+        line-height: 1.2;
+        padding: 0 0.5rem;
     }
 
     .hero-subtitle {
-        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+        font-size: clamp(0.9rem, 3.5vw, 1.05rem);
         margin-bottom: 2rem;
         padding: 0 1rem;
         line-height: 1.7;
         text-align: center;
+        max-width: 100%;
     }
 
     .hero-buttons {
@@ -1323,7 +1343,7 @@ img[src=""].brand-logo {
     .services-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        padding: 0 0.5rem;
+        padding: 0 0.75rem;
     }
 
     .service-card {
