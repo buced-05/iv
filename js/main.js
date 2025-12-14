@@ -16,48 +16,50 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Menu Mobile Premium - Variables
+// Menu Mobile - Variables
 const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.getElementById('mobileMenu');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const mobileMenuClose = document.getElementById('mobileMenuClose');
-const mobileMenuLinks = document.querySelectorAll('.mobile-nav-item');
+const mobileMenuLinks = document.querySelectorAll('.mobile-nav-link');
+
+// S'assurer que le bouton hamburger est visible et fonctionnel
+if (navToggle) {
+    navToggle.style.display = 'flex';
+    navToggle.style.visibility = 'visible';
+    navToggle.style.opacity = '1';
+    navToggle.style.pointerEvents = 'auto';
+    navToggle.style.cursor = 'pointer';
+}
 
 // Fonction pour ouvrir le menu
 function openMobileMenu() {
     if (mobileMenu && mobileMenuOverlay) {
-        // Forcer le z-index au maximum absolu (2147483647 = max int32)
-        mobileMenuOverlay.style.zIndex = '2147483646';
-        mobileMenuOverlay.style.position = 'fixed';
-        mobileMenuOverlay.style.top = '0';
-        mobileMenuOverlay.style.left = '0';
-        mobileMenuOverlay.style.right = '0';
-        mobileMenuOverlay.style.bottom = '0';
-        mobileMenuOverlay.style.width = '100vw';
-        mobileMenuOverlay.style.height = '100vh';
-        
-        mobileMenu.style.zIndex = '2147483647';
-        mobileMenu.style.position = 'fixed';
-        mobileMenu.style.top = '0';
-        mobileMenu.style.left = '0';
-        mobileMenu.style.right = '0';
-        mobileMenu.style.bottom = '0';
-        mobileMenu.style.width = '100vw';
-        mobileMenu.style.height = '100vh';
-        
         // S'assurer que tous les autres éléments sont en dessous
-        const allSections = document.querySelectorAll('section, .hero, .hero-content, .hero-background');
+        const allSections = document.querySelectorAll('section, .hero, .hero-content, .hero-background, .services, .about, .contact, .testimonials, .why-choose-us, .trust-section, .footer, .container, .section-header');
         allSections.forEach(el => {
-            if (el) {
+            if (el && !el.closest('.mobile-menu')) {
                 el.style.zIndex = '0';
+                el.style.position = 'relative';
             }
+        });
+        
+        // S'assurer que le navbar est en dessous du menu
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            navbar.style.zIndex = '1000';
+        }
+        
+        // Forcer la visibilité de tous les éléments du menu
+        const menuElements = mobileMenu.querySelectorAll('*');
+        menuElements.forEach(el => {
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
         });
         
         document.body.style.overflow = 'hidden';
         mobileMenuOverlay.classList.add('active');
-        setTimeout(() => {
-            mobileMenu.classList.add('active');
-        }, 50);
+        mobileMenu.classList.add('active');
         
         // Animer le bouton hamburger
         if (navToggle) {
@@ -78,7 +80,7 @@ function closeMobileMenu() {
         setTimeout(() => {
             mobileMenuOverlay.classList.remove('active');
             document.body.style.overflow = '';
-        }, 300);
+        }, 400);
         
         // Réinitialiser le bouton hamburger
         if (navToggle) {
@@ -97,12 +99,21 @@ if (navToggle) {
     navToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
+        e.stopImmediatePropagation();
+        
+        // Vérifier si le menu est déjà ouvert
+        const isMenuOpen = mobileMenu && mobileMenu.classList.contains('active');
+        
+        if (isMenuOpen) {
             closeMobileMenu();
         } else {
             openMobileMenu();
         }
     });
+    
+    // S'assurer que le bouton est cliquable
+    navToggle.style.pointerEvents = 'auto';
+    navToggle.style.cursor = 'pointer';
 }
 
 // Fermer le menu au clic sur le bouton fermer
@@ -234,5 +245,67 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
+    });
+    
+    // FORCER L'AFFICHAGE DU NAVBAR
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        navbar.style.display = 'block';
+        navbar.style.visibility = 'visible';
+        navbar.style.opacity = '1';
+        navbar.style.position = 'fixed';
+        navbar.style.top = '0';
+        navbar.style.left = '0';
+        navbar.style.right = '0';
+        navbar.style.zIndex = '1000';
+        navbar.style.width = '100%';
+    }
+    
+    // FORCER L'AFFICHAGE DU CONTAINER
+    const navContainer = document.querySelector('.navbar .container');
+    if (navContainer) {
+        navContainer.style.display = 'flex';
+        navContainer.style.visibility = 'visible';
+        navContainer.style.opacity = '1';
+    }
+    
+    // FORCER L'AFFICHAGE DU LOGO
+    const navBrand = document.querySelector('.nav-brand');
+    if (navBrand) {
+        navBrand.style.display = 'flex';
+        navBrand.style.visibility = 'visible';
+        navBrand.style.opacity = '1';
+    }
+    
+    // S'assurer que le bouton hamburger est visible sur mobile
+    if (window.innerWidth <= 968) {
+        if (navToggle) {
+            navToggle.style.display = 'flex';
+            navToggle.style.visibility = 'visible';
+            navToggle.style.opacity = '1';
+            navToggle.style.pointerEvents = 'auto';
+        }
+    }
+    
+    // Écouter les changements de taille de fenêtre
+    window.addEventListener('resize', () => {
+        // Toujours s'assurer que le navbar est visible
+        if (navbar) {
+            navbar.style.display = 'block';
+            navbar.style.visibility = 'visible';
+            navbar.style.opacity = '1';
+        }
+        
+        if (window.innerWidth <= 968) {
+            if (navToggle) {
+                navToggle.style.display = 'flex';
+                navToggle.style.visibility = 'visible';
+                navToggle.style.opacity = '1';
+            }
+        } else {
+            if (navToggle) {
+                navToggle.style.display = 'none';
+            }
+        }
     });
 });
