@@ -21,6 +21,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 
+// S'assurer que le menu est caché par défaut sur mobile
+if (navMenu && window.innerWidth <= 968) {
+    navMenu.classList.add('hidden');
+}
+
 function toggleMobileMenu(event) {
     if (event) {
         event.preventDefault();
