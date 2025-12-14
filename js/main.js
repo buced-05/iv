@@ -39,6 +39,9 @@ function toggleMobileMenu(event) {
         if (isHidden) {
             isMenuOpening = true;
             navMenu.classList.remove('hidden');
+            // Forcer le z-index au maximum via style inline
+            navMenu.style.zIndex = '9999';
+            navMenu.style.position = 'fixed';
             
             // Réinitialiser le flag après un court délai
             setTimeout(() => {
