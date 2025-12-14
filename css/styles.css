@@ -1572,33 +1572,47 @@ img[src=""].brand-logo {
     }
 
     .why-icon {
-        width: 50px;
-        height: 50px;
-        min-width: 50px;
-        min-height: 50px;
-        max-width: 50px;
-        max-height: 50px;
-    }
-
-    .why-icon svg {
-        width: 25px;
-        height: 25px;
-        max-width: 25px;
-        max-height: 25px;
-    }
-
-    .service-icon {
         width: 45px;
         height: 45px;
         min-width: 45px;
         min-height: 45px;
         max-width: 45px;
         max-height: 45px;
+        margin-bottom: 0.75rem;
+    }
+
+    .why-icon svg {
+        width: 22px;
+        height: 22px;
+        max-width: 22px;
+        max-height: 22px;
+    }
+
+    .service-icon {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        min-height: 42px;
+        max-width: 42px;
+        max-height: 42px;
+        margin-bottom: 0.75rem;
     }
 
     .service-icon svg {
-        max-width: 45px;
-        max-height: 45px;
+        width: 22px;
+        height: 22px;
+        max-width: 22px;
+        max-height: 22px;
+    }
+
+    .badge-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+        font-size: 1.3rem;
     }
 
     .trust-section,
