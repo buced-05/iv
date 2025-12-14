@@ -74,18 +74,18 @@ if (navMenu) {
 let menuCloseTimeout;
 document.addEventListener('click', (e) => {
     // Ignorer si c'est le toggle lui-même
-    if (navToggle && navToggle.contains(e.target)) {
+    if (navToggle && (navToggle.contains(e.target) || navToggle === e.target)) {
         return;
     }
     
     // Ignorer si c'est dans le menu
-    if (navMenu && navMenu.contains(e.target)) {
+    if (navMenu && (navMenu.contains(e.target) || navMenu === e.target)) {
         return;
     }
     
     // Fermer le menu seulement s'il est ouvert
     if (navMenu && navToggle && !navMenu.classList.contains('hidden')) {
-        // Petit délai pour éviter les conflits avec le toggle
+        // Délai plus long pour éviter les conflits
         clearTimeout(menuCloseTimeout);
         menuCloseTimeout = setTimeout(() => {
             if (navMenu && !navMenu.classList.contains('hidden')) {
@@ -97,9 +97,9 @@ document.addEventListener('click', (e) => {
                     spans[2].style.transform = 'none';
                 }
             }
-        }, 100);
+        }, 200);
     }
-});
+}, true); // Utiliser capture phase pour mieux gérer les événements
 
 // Navbar scroll effect
 let lastScroll = 0;
