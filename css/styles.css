@@ -1254,6 +1254,26 @@ img[src=""].brand-logo {
         opacity: 1 !important;
         visibility: visible !important;
         z-index: 2147483647 !important;
+        display: flex !important;
+    }
+    
+    .mobile-menu.active .mobile-menu-content {
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: flex !important;
+    }
+    
+    .mobile-menu.active .mobile-menu-nav {
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: flex !important;
+    }
+    
+    .mobile-menu.active .mobile-nav-item {
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: flex !important;
+        color: #FFFFFF !important;
     }
     
     .mobile-menu-close-btn {
@@ -1384,6 +1404,30 @@ img[src=""].brand-logo {
     
     .mobile-nav-item .nav-text {
         flex: 1;
+        color: #FFFFFF !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .mobile-nav-item .nav-icon {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .mobile-menu-content {
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: flex !important;
+    }
+    
+    .mobile-menu-logo {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .mobile-menu-logo h2 {
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     @media (max-width: 480px) {
