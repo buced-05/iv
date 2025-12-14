@@ -209,32 +209,34 @@ img[src=""].brand-logo {
 .gradient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.5;
+    filter: blur(100px);
+    opacity: 0.3;
     animation: float 20s infinite ease-in-out;
+    z-index: -1;
+    overflow: hidden;
 }
 
 .orb-1 {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     background: var(--gradient-1);
-    top: -250px;
-    left: -250px;
+    top: -200px;
+    left: -200px;
     animation-delay: 0s;
 }
 
 .orb-2 {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     background: linear-gradient(135deg, #16213E 0%, #1A1A2E 100%);
-    bottom: -200px;
-    right: -200px;
+    bottom: -175px;
+    right: -175px;
     animation-delay: -7s;
 }
 
 .orb-3 {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     background: linear-gradient(135deg, #E67E22 0%, #F39C12 100%);
     top: 50%;
     left: 50%;
