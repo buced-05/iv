@@ -21,9 +21,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 
+// Forcer le z-index du toggle dès le chargement
+if (navToggle) {
+    navToggle.style.zIndex = '10000';
+    navToggle.style.position = 'relative';
+}
+
 // S'assurer que le menu est caché par défaut sur mobile
 if (navMenu && window.innerWidth <= 968) {
     navMenu.classList.add('hidden');
+    // Forcer le z-index du menu même quand il est caché
+    navMenu.style.zIndex = '9999';
+    navMenu.style.position = 'fixed';
 }
 
 function toggleMobileMenu(event) {
