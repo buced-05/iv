@@ -1,15 +1,28 @@
+# robots.txt pour IVOIRE.AI
+# https://www.ivoire.ai/robots.txt
+
+# Autoriser tous les robots
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://www.ivoire.ai/sitemap.xml
-Sitemap: https://ivoire.ai/sitemap.xml
+# Autoriser spécifiquement Googlebot
+User-agent: Googlebot
+Allow: /
 
-# Disallow
+# Autoriser spécifiquement Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Interdire l'accès aux fichiers de test et documentation
 Disallow: /docs/
 Disallow: /test-emailjs.html
 Disallow: /diagnostic-emailjs.html
+Disallow: /test-ga.html
 
-# Crawl-delay
+# Sitemaps
+Sitemap: https://www.ivoire.ai/sitemap.xml
+Sitemap: https://ivoire.ai/sitemap.xml
+
+# Délai entre les requêtes (en secondes)
 Crawl-delay: 1
 
