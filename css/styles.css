@@ -1176,12 +1176,21 @@ img[src=""].brand-logo {
         border-bottom: 1px solid var(--border-color);
         z-index: 999;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
         max-height: calc(100vh - 70px);
         overflow-y: auto;
         margin: 0;
+        /* Menu caché par défaut sur mobile */
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .nav-menu:not(.hidden) {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     .nav-menu.hidden {
