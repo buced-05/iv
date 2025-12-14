@@ -491,10 +491,12 @@ body {
 }
 
 .service-icon {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
     margin-bottom: 1.5rem;
     color: var(--primary-color);
     flex-shrink: 0;
@@ -506,6 +508,8 @@ body {
 .service-icon svg {
     width: 100%;
     height: 100%;
+    max-width: 50px;
+    max-height: 50px;
     flex-shrink: 0;
 }
 
@@ -783,11 +787,13 @@ body {
 }
 
 .badge-icon {
-    font-size: 2.5rem;
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -946,10 +952,12 @@ body {
 }
 
 .why-icon {
-    width: 80px;
-    height: 80px;
-    min-width: 80px;
-    min-height: 80px;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     margin: 0 auto 1.5rem;
     background: var(--gradient-1);
     border-radius: 20px;
@@ -962,8 +970,10 @@ body {
 }
 
 .why-icon svg {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
     flex-shrink: 0;
 }
 
@@ -1411,15 +1421,33 @@ body {
     }
 
     .why-icon {
-        width: 60px;
-        height: 60px;
-        min-width: 60px;
-        min-height: 60px;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 50px;
+        max-height: 50px;
     }
 
     .why-icon svg {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
+        max-width: 25px;
+        max-height: 25px;
+    }
+
+    .service-icon {
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+        min-height: 45px;
+        max-width: 45px;
+        max-height: 45px;
+    }
+
+    .service-icon svg {
+        max-width: 45px;
+        max-height: 45px;
     }
 
     .trust-section,
