@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test EmailJS - IVOIRE.AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0F0F1E;
+            color: #fff;
+        }
+        .test-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        button {
+            background: #F39C12;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #E67E22;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #27ae60;
+        }
+        .error {
+            background: #e74c3c;
+        }
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test EmailJS Configuration</h1>
+    
+    <div class="test-box">
+        <h2>Configuration actuelle:</h2>
+        <pre id="config"></pre>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test d'envoi</h2>
+        <p>Cliquez sur le bouton pour tester l'envoi d'un email de test.</p>
+        <button onclick="testEmail()">Envoyer un email de test</button>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="config.js"></script>
+    <script>
+        // Display current configuration
+        if (typeof EMAILJS_CONFIG !== 'undefined') {
+            document.getElementById('config').textContent = JSON.stringify(EMAILJS_CONFIG, null, 2);
+        } else {
+            document.getElementById('config').textContent = 'Configuration non trouvée!';
+        }
+
+        async function testEmail() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Envoi en cours...</p>';
+            
+            if (typeof emailjs === 'undefined') {
+                resultDiv.innerHTML = '<div class="result error">EmailJS n\'est pas chargé!</div>';
+                return;
+            }
+
+            if (typeof EMAILJS_CONFIG === 'undefined') {
+                resultDiv.innerHTML = '<div class="result error">Configuration non trouvée!</div>';
+                return;
+            }
+
+            try {
+                // Initialize EmailJS
+                emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+                
+                // Test parameters
+                const templateParams = {
+                    from_name: 'Test IVOIRE.AI',
+                    from_email: 'test@example.com',
+                    subject: 'Test depuis le site IVOIRE.AI',
+                    message: 'Ceci est un message de test pour vérifier la configuration EmailJS.',
+                    to_email: EMAILJS_CONFIG.TO_EMAIL,  // Destinataire
+                    reply_to: 'test@example.com'
+                };
+
+                console.log('Envoi avec:', {
+                    serviceId: EMAILJS_CONFIG.SERVICE_ID,
+                    templateId: EMAILJS_CONFIG.TEMPLATE_ID,
+                    params: templateParams
+                });
+
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.SERVICE_ID,
+                    EMAILJS_CONFIG.TEMPLATE_ID,
+                    templateParams
+                );
+
+                console.log('Réponse:', response);
+
+                if (response && response.status === 200) {
+                    resultDiv.innerHTML = '<div class="result success">✓ Email envoyé avec succès! Vérifiez votre boîte mail: ' + EMAILJS_CONFIG.TO_EMAIL + '</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="result error">Réponse inattendue: ' + JSON.stringify(response) + '</div>';
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                let errorMsg = 'Erreur: ';
+                if (error.text) {
+                    errorMsg += error.text;
+                } else if (error.message) {
+                    errorMsg += error.message;
+                } else {
+                    errorMsg += JSON.stringify(error);
+                }
+                resultDiv.innerHTML = '<div class="result error">' + errorMsg + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>
+

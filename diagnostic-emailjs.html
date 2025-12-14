@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic EmailJS - IVOIRE.AI</title>
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0F0F1E;
+            color: #fff;
+        }
+        .diagnostic-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #F39C12;
+        }
+        .error-box {
+            background: rgba(231, 76, 60, 0.2);
+            border-left-color: #e74c3c;
+        }
+        .success-box {
+            background: rgba(39, 174, 96, 0.2);
+            border-left-color: #27ae60;
+        }
+        .warning-box {
+            background: rgba(243, 156, 18, 0.2);
+            border-left-color: #F39C12;
+        }
+        h1 { color: #F39C12; }
+        h2 { color: #fff; margin-top: 0; }
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        button {
+            background: #F39C12;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #E67E22;
+        }
+        .step {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 5px;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #F39C12;
+            color: #000;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnostic EmailJS - IVOIRE.AI</h1>
+    
+    <div class="diagnostic-box" id="config-check">
+        <h2>1. Vérification de la Configuration</h2>
+        <div id="config-result"></div>
+    </div>
+
+    <div class="diagnostic-box" id="emailjs-check">
+        <h2>2. Vérification EmailJS</h2>
+        <div id="emailjs-result"></div>
+    </div>
+
+    <div class="diagnostic-box" id="test-section">
+        <h2>3. Test d'Envoi</h2>
+        <p>Cliquez sur le bouton pour tester l'envoi avec différentes configurations :</p>
+        <button onclick="testWithFixedEmail()">Test 1: Template avec adresse fixe</button>
+        <button onclick="testWithVariable()">Test 2: Template avec {{to_email}}</button>
+        <button onclick="testWithBoth()">Test 3: Avec to_email dans paramètres</button>
+        <div id="test-result"></div>
+    </div>
+
+    <div class="diagnostic-box warning-box">
+        <h2>⚠️ Instructions pour corriger "The recipients address is empty"</h2>
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Connectez-vous à EmailJS</strong> : https://www.emailjs.com/
+        </div>
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Allez dans "Email Templates"</strong> → Cliquez sur <code>template_yunlpaa</code>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Dans le champ "To Email"</strong>, vous DEVEZ mettre UNE de ces options :
+            <pre>Option A (Recommandée): newtiv05@gmail.com
+Option B: {{to_email}}</pre>
+        </div>
+        <div class="step">
+            <span class="step-number">4</span>
+            <strong>Vérifiez que le champ n'est PAS vide</strong> - c'est la cause de l'erreur !
+        </div>
+        <div class="step">
+            <span class="step-number">5</span>
+            <strong>Cliquez sur "Save"</strong> pour enregistrer
+        </div>
+        <div class="step">
+            <span class="step-number">6</span>
+            <strong>Re-testez</strong> avec les boutons ci-dessus
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="config.js"></script>
+    <script>
+        // Diagnostic 1: Configuration
+        function checkConfiguration() {
+            const configDiv = document.getElementById('config-result');
+            if (typeof EMAILJS_CONFIG === 'undefined') {
+                configDiv.innerHTML = '<div class="error-box" style="padding: 10px; border-radius: 5px;">❌ Configuration non trouvée! Vérifiez que config.js est chargé.</div>';
+                return false;
+            }
+
+            let html = '<div class="success-box" style="padding: 10px; border-radius: 5px;">✅ Configuration trouvée:</div><pre>';
+            html += JSON.stringify(EMAILJS_CONFIG, null, 2);
+            html += '</pre>';
+
+            // Vérifier chaque champ
+            const issues = [];
+            if (!EMAILJS_CONFIG.PUBLIC_KEY || EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+                issues.push('Public Key manquante ou non configurée');
+            }
+            if (!EMAILJS_CONFIG.SERVICE_ID || EMAILJS_CONFIG.SERVICE_ID === 'YOUR_SERVICE_ID') {
+                issues.push('Service ID manquant ou non configuré');
+            }
+            if (!EMAILJS_CONFIG.TEMPLATE_ID || EMAILJS_CONFIG.TEMPLATE_ID === 'YOUR_TEMPLATE_ID') {
+                issues.push('Template ID manquant ou non configuré');
+            }
+            if (!EMAILJS_CONFIG.TO_EMAIL) {
+                issues.push('Email de destination manquant');
+            }
+
+            if (issues.length > 0) {
+                html += '<div class="error-box" style="padding: 10px; border-radius: 5px; margin-top: 10px;">❌ Problèmes détectés:<ul>';
+                issues.forEach(issue => {
+                    html += '<li>' + issue + '</li>';
+                });
+                html += '</ul></div>';
+            } else {
+                html += '<div class="success-box" style="padding: 10px; border-radius: 5px; margin-top: 10px;">✅ Tous les champs sont configurés</div>';
+            }
+
+            configDiv.innerHTML = html;
+            return issues.length === 0;
+        }
+
+        // Diagnostic 2: EmailJS
+        function checkEmailJS() {
+            const emailjsDiv = document.getElementById('emailjs-result');
+            let html = '';
+
+            if (typeof emailjs === 'undefined') {
+                html = '<div class="error-box" style="padding: 10px; border-radius: 5px;">❌ EmailJS n\'est pas chargé!</div>';
+            } else {
+                html = '<div class="success-box" style="padding: 10px; border-radius: 5px;">✅ EmailJS est chargé</div>';
+                
+                // Tenter l'initialisation
+                try {
+                    if (typeof EMAILJS_CONFIG !== 'undefined' && EMAILJS_CONFIG.PUBLIC_KEY) {
+                        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+                        html += '<div class="success-box" style="padding: 10px; border-radius: 5px; margin-top: 10px;">✅ EmailJS initialisé avec succès</div>';
+                    }
+                } catch (error) {
+                    html += '<div class="error-box" style="padding: 10px; border-radius: 5px; margin-top: 10px;">❌ Erreur d\'initialisation: ' + error.message + '</div>';
+                }
+            }
+
+            emailjsDiv.innerHTML = html;
+        }
+
+        // Tests d'envoi
+        async function testWithFixedEmail() {
+            await testEmail('Test avec adresse fixe dans template', {
+                from_name: 'Test Diagnostic',
+                from_email: 'test@example.com',
+                subject: 'Test - Adresse fixe',
+                message: 'Ce test suppose que le template a "newtiv05@gmail.com" directement dans le champ To Email.',
+                to_email: EMAILJS_CONFIG.TO_EMAIL
+            });
+        }
+
+        async function testWithVariable() {
+            await testEmail('Test avec {{to_email}} dans template', {
+                from_name: 'Test Diagnostic',
+                from_email: 'test@example.com',
+                subject: 'Test - Variable to_email',
+                message: 'Ce test suppose que le template a "{{to_email}}" dans le champ To Email.',
+                to_email: EMAILJS_CONFIG.TO_EMAIL
+            });
+        }
+
+        async function testWithBoth() {
+            await testEmail('Test avec to_email dans paramètres ET template', {
+                from_name: 'Test Diagnostic',
+                from_email: 'test@example.com',
+                subject: 'Test - Configuration complète',
+                message: 'Ce test envoie to_email dans les paramètres. Le template doit avoir soit une adresse fixe soit {{to_email}}.',
+                to_email: EMAILJS_CONFIG.TO_EMAIL,
+                reply_to: 'test@example.com'
+            });
+        }
+
+        async function testEmail(testName, params) {
+            const resultDiv = document.getElementById('test-result');
+            resultDiv.innerHTML = '<div style="padding: 15px; background: rgba(243, 156, 18, 0.2); border-radius: 5px; margin: 10px 0;">🔄 ' + testName + ' - Envoi en cours...</div>';
+
+            try {
+                if (typeof emailjs === 'undefined') {
+                    throw new Error('EmailJS n\'est pas chargé');
+                }
+
+                if (typeof EMAILJS_CONFIG === 'undefined') {
+                    throw new Error('Configuration non trouvée');
+                }
+
+                // Initialiser
+                emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+
+                console.log('Test:', testName);
+                console.log('Paramètres:', params);
+                console.log('Service ID:', EMAILJS_CONFIG.SERVICE_ID);
+                console.log('Template ID:', EMAILJS_CONFIG.TEMPLATE_ID);
+
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.SERVICE_ID,
+                    EMAILJS_CONFIG.TEMPLATE_ID,
+                    params
+                );
+
+                console.log('Réponse:', response);
+
+                if (response && response.status === 200) {
+                    resultDiv.innerHTML = '<div class="success-box" style="padding: 15px; border-radius: 5px; margin: 10px 0;">✅ ' + testName + ' - SUCCÈS! Email envoyé. Vérifiez ' + EMAILJS_CONFIG.TO_EMAIL + '</div>';
+                } else {
+                    throw new Error('Réponse inattendue: ' + JSON.stringify(response));
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                let errorMsg = '❌ ' + testName + ' - ÉCHEC<br>';
+                
+                if (error.text) {
+                    errorMsg += '<strong>Erreur EmailJS:</strong> ' + error.text + '<br>';
+                }
+                if (error.message) {
+                    errorMsg += '<strong>Message:</strong> ' + error.message + '<br>';
+                }
+                if (error.status) {
+                    errorMsg += '<strong>Status:</strong> ' + error.status + '<br>';
+                }
+
+                errorMsg += '<br><strong>Solution:</strong> Vérifiez que le champ "To Email" dans votre template EmailJS contient soit "newtiv05@gmail.com" soit "{{to_email}}"';
+
+                resultDiv.innerHTML = '<div class="error-box" style="padding: 15px; border-radius: 5px; margin: 10px 0;">' + errorMsg + '</div>';
+            }
+        }
+
+        // Lancer les diagnostics au chargement
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkConfiguration();
+                checkEmailJS();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+

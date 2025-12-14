@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ivoire.ai/sitemap.xml
+
+# Disallow
+Disallow: /docs/
+Disallow: /test-emailjs.html
+Disallow: /diagnostic-emailjs.html
+
+# Crawl-delay
+Crawl-delay: 1
+
