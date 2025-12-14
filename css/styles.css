@@ -406,6 +406,7 @@ img[src=""].brand-logo {
 .scroll-indicator {
     position: absolute;
     bottom: 2rem;
+    z-index: 1 !important;
     left: 50%;
     transform: translateX(-50%);
     animation: bounce 2s infinite;
