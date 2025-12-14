@@ -165,7 +165,7 @@ img[src=""].brand-logo {
     border-radius: 8px;
     cursor: pointer;
     gap: 5px;
-    z-index: 1001;
+    z-index: 10000 !important;
     position: relative;
     padding: 0.5rem;
     transition: all 0.3s ease;
