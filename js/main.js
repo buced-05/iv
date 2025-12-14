@@ -26,6 +26,12 @@ const mobileMenuLinks = document.querySelectorAll('.mobile-nav-item');
 // Fonction pour ouvrir le menu
 function openMobileMenu() {
     if (mobileMenu && mobileMenuOverlay) {
+        // Forcer le z-index au maximum via style inline
+        mobileMenuOverlay.style.zIndex = '999999';
+        mobileMenuOverlay.style.position = 'fixed';
+        mobileMenu.style.zIndex = '9999999';
+        mobileMenu.style.position = 'fixed';
+        
         document.body.style.overflow = 'hidden';
         mobileMenuOverlay.classList.add('active');
         setTimeout(() => {
