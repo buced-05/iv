@@ -1321,13 +1321,20 @@ img[src=""].brand-logo {
         text-align: center;
     }
     
-    .mobile-menu-logo img {
+    .mobile-menu-logo .mobile-logo-img {
         width: 80px;
         height: 80px;
         object-fit: contain;
+        display: block;
     }
     
-    .mobile-menu-logo h2 {
+    .mobile-menu-logo .mobile-logo-img[style*="display: none"] ~ .mobile-logo-text,
+    .mobile-menu-logo .mobile-logo-img:not([src]) ~ .mobile-logo-text,
+    .mobile-menu-logo:not(:has(.mobile-logo-img)) .mobile-logo-text {
+        display: block !important;
+    }
+    
+    .mobile-menu-logo .mobile-logo-text {
         font-size: 2rem;
         font-weight: 800;
         background: var(--gradient-1);
@@ -1335,31 +1342,36 @@ img[src=""].brand-logo {
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin: 0;
+        display: none;
     }
     
     .mobile-menu-nav {
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .mobile-nav-item {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        padding: 1.5rem 2rem;
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        text-decoration: none;
-        color: var(--text-primary);
-        font-size: 1.2rem;
-        font-weight: 600;
+        display: flex !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        padding: 1.5rem 2rem !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 16px !important;
+        text-decoration: none !important;
+        color: #FFFFFF !important;
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
+        position: relative !important;
         overflow: hidden;
         backdrop-filter: blur(10px);
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .mobile-nav-item::before {
