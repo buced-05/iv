@@ -26,11 +26,32 @@ const mobileMenuLinks = document.querySelectorAll('.mobile-nav-item');
 // Fonction pour ouvrir le menu
 function openMobileMenu() {
     if (mobileMenu && mobileMenuOverlay) {
-        // Forcer le z-index au maximum via style inline
-        mobileMenuOverlay.style.zIndex = '999999';
+        // Forcer le z-index au maximum absolu (2147483647 = max int32)
+        mobileMenuOverlay.style.zIndex = '2147483646';
         mobileMenuOverlay.style.position = 'fixed';
-        mobileMenu.style.zIndex = '9999999';
+        mobileMenuOverlay.style.top = '0';
+        mobileMenuOverlay.style.left = '0';
+        mobileMenuOverlay.style.right = '0';
+        mobileMenuOverlay.style.bottom = '0';
+        mobileMenuOverlay.style.width = '100vw';
+        mobileMenuOverlay.style.height = '100vh';
+        
+        mobileMenu.style.zIndex = '2147483647';
         mobileMenu.style.position = 'fixed';
+        mobileMenu.style.top = '0';
+        mobileMenu.style.left = '0';
+        mobileMenu.style.right = '0';
+        mobileMenu.style.bottom = '0';
+        mobileMenu.style.width = '100vw';
+        mobileMenu.style.height = '100vh';
+        
+        // S'assurer que tous les autres éléments sont en dessous
+        const allSections = document.querySelectorAll('section, .hero, .hero-content, .hero-background');
+        allSections.forEach(el => {
+            if (el) {
+                el.style.zIndex = '0';
+            }
+        });
         
         document.body.style.overflow = 'hidden';
         mobileMenuOverlay.classList.add('active');
