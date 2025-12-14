@@ -21,7 +21,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 
-function toggleMobileMenu() {
+function toggleMobileMenu(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
     if (navMenu) {
         navMenu.classList.toggle('hidden');
         
@@ -43,6 +48,10 @@ function toggleMobileMenu() {
 
 if (navToggle) {
     navToggle.addEventListener('click', toggleMobileMenu);
+    // Empêcher la propagation pour éviter que le clic déclenche le listener "click en dehors"
+    navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 }
 
 // Fermer le menu mobile quand on clique sur un lien
@@ -61,17 +70,34 @@ if (navMenu) {
     });
 }
 
-// Fermer le menu si on clique en dehors
+// Fermer le menu si on clique en dehors (avec un petit délai pour éviter les conflits)
+let menuCloseTimeout;
 document.addEventListener('click', (e) => {
-    if (navMenu && navToggle && 
-        !navMenu.contains(e.target) && 
-        !navToggle.contains(e.target) &&
-        !navMenu.classList.contains('hidden')) {
-        navMenu.classList.add('hidden');
-        const spans = navToggle.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+    // Ignorer si c'est le toggle lui-même
+    if (navToggle && navToggle.contains(e.target)) {
+        return;
+    }
+    
+    // Ignorer si c'est dans le menu
+    if (navMenu && navMenu.contains(e.target)) {
+        return;
+    }
+    
+    // Fermer le menu seulement s'il est ouvert
+    if (navMenu && navToggle && !navMenu.classList.contains('hidden')) {
+        // Petit délai pour éviter les conflits avec le toggle
+        clearTimeout(menuCloseTimeout);
+        menuCloseTimeout = setTimeout(() => {
+            if (navMenu && !navMenu.classList.contains('hidden')) {
+                navMenu.classList.add('hidden');
+                const spans = navToggle.querySelectorAll('span');
+                if (spans.length >= 3) {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            }
+        }, 100);
     }
 });
 

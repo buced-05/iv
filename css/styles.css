@@ -1169,18 +1169,20 @@ img[src=""].brand-logo {
         backdrop-filter: blur(20px);
         width: 100%;
         text-align: center;
-        transition: transform 0.3s ease, opacity 0.3s ease;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
         padding: 2rem 0;
         border-bottom: 1px solid var(--border-color);
         z-index: 999;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         transform: translateY(0);
         opacity: 1;
+        visibility: visible;
     }
 
     .nav-menu.hidden {
         transform: translateY(-100%);
         opacity: 0;
+        visibility: hidden;
         pointer-events: none;
     }
 
