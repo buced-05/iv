@@ -20,7 +20,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.getElementById('mobileMenu');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-const mobileMenuClose = document.getElementById('mobileMenuClose');
 const mobileMenuLinks = document.querySelectorAll('.mobile-nav-link');
 
 // S'assurer que le bouton hamburger est visible et fonctionnel
@@ -116,12 +115,12 @@ if (navToggle) {
     navToggle.style.cursor = 'pointer';
 }
 
-// Fermer le menu au clic sur le bouton fermer
-if (mobileMenuClose) {
-    mobileMenuClose.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeMobileMenu();
+// Fermer le menu au clic sur l'overlay
+if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileMenuOverlay) {
+            closeMobileMenu();
+        }
     });
 }
 
