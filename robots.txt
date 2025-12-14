@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
+Sitemap: https://www.ivoire.ai/sitemap.xml
 Sitemap: https://ivoire.ai/sitemap.xml
 
 # Disallow

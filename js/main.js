@@ -21,23 +21,59 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
+function toggleMobileMenu() {
+    if (navMenu) {
         navMenu.classList.toggle('active');
         
         // Animate hamburger icon
-        const spans = navToggle.querySelectorAll('span');
-        if (navMenu.classList.contains('active')) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
+        const spans = navToggle?.querySelectorAll('span');
+        if (spans) {
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         }
+    }
+}
+
+if (navToggle) {
+    navToggle.addEventListener('click', toggleMobileMenu);
+}
+
+// Fermer le menu mobile quand on clique sur un lien
+if (navMenu) {
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            const spans = navToggle?.querySelectorAll('span');
+            if (spans) {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
     });
 }
+
+// Fermer le menu si on clique en dehors
+document.addEventListener('click', (e) => {
+    if (navMenu && navToggle && 
+        !navMenu.contains(e.target) && 
+        !navToggle.contains(e.target) &&
+        navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        const spans = navToggle.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+    }
+});
 
 // Navbar scroll effect
 let lastScroll = 0;
@@ -149,4 +185,70 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Contact functions - Masquage des informations sensibles
+// Les informations sont encodées en base64 pour éviter le spam
+function getPhoneNumber() {
+    // Encodage base64 pour masquer le numéro
+    const encoded = 'KzIyNTA1OTU2MTg5NjQ=';
+    return atob(encoded);
+}
+
+function getEmailAddress() {
+    // Encodage base64 pour masquer l'email
+    const encoded = 'bmV3dGl2MDVAZ21haWwuY29t';
+    return atob(encoded);
+}
+
+// Fonction pour initier un appel (uniquement sur clic utilisateur)
+function initiateCall(event) {
+    // Empêcher tout comportement par défaut
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    try {
+        const phoneNumber = getPhoneNumber();
+        
+        // Envoyer un événement Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'phone_click', {
+                'event_category': 'contact',
+                'event_label': 'Phone button clicked'
+            });
+        }
+        
+        // Ouvrir l'application d'appel - window.location.href fonctionne dans le contexte d'un onclick
+        window.location.href = 'tel:' + phoneNumber;
+    } catch (error) {
+        console.error('Erreur lors de l\'appel:', error);
+    }
+}
+
+// Fonction pour initier un email (uniquement sur clic utilisateur)
+function initiateEmail(event) {
+    // Empêcher tout comportement par défaut
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    try {
+        const emailAddress = getEmailAddress();
+        
+        // Envoyer un événement Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'email_click', {
+                'event_category': 'contact',
+                'event_label': 'Email button clicked'
+            });
+        }
+        
+        // Ouvrir le client email - window.location.href fonctionne dans le contexte d'un onclick
+        window.location.href = 'mailto:' + emailAddress + '?subject=Contact depuis IVOIRE.AI';
+    } catch (error) {
+        console.error('Erreur lors de l\'envoi d\'email:', error);
+    }
+}
 
