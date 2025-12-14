@@ -204,16 +204,21 @@ img[src=""].brand-logo {
     right: 0;
     bottom: 0;
     z-index: -1;
+    overflow: hidden;
+    background: var(--bg-dark);
+    width: 100%;
+    max-width: 100vw;
 }
 
 .gradient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.3;
+    filter: blur(120px);
+    opacity: 0.2;
     animation: float 20s infinite ease-in-out;
     z-index: -1;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .orb-1 {
