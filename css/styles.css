@@ -86,6 +86,32 @@ body {
     overflow-x: hidden;
 }
 
+.nav-brand .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.nav-brand .brand-link:hover {
+    transform: scale(1.05);
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
+}
+
+.brand-logo[style*="display: none"] + .brand-text {
+    display: inline-block !important;
+}
+
 .nav-brand .brand-text {
     font-size: 1.5rem;
     font-weight: 800;
@@ -93,6 +119,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    display: inline-block;
 }
 
 .nav-menu {
