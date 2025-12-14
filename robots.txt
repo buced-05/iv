@@ -19,9 +19,8 @@ Disallow: /test-emailjs.html
 Disallow: /diagnostic-emailjs.html
 Disallow: /test-ga.html
 
-# Sitemaps
+# Sitemap (version canonique avec www)
 Sitemap: https://www.ivoire.ai/sitemap.xml
-Sitemap: https://ivoire.ai/sitemap.xml
 
 # Délai entre les requêtes (en secondes)
 Crawl-delay: 1

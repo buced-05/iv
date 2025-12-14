@@ -5,16 +5,13 @@
     RewriteEngine On
     RewriteBase /
 
-    # Forcer HTTPS
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-    # Forcer www (ou supprimer www selon préférence)
+    # Forcer HTTPS et www en une seule étape
+    # Rediriger ivoire.ai (sans www) vers www.ivoire.ai avec HTTPS
     RewriteCond %{HTTP_HOST} ^ivoire\.ai$ [NC]
     RewriteRule ^(.*)$ https://www.ivoire.ai/$1 [L,R=301]
-
-    # Rediriger toutes les variantes vers www.ivoire.ai
-    RewriteCond %{HTTP_HOST} ^ivoire\.ai$ [NC,OR]
+    
+    # Forcer HTTPS pour www.ivoire.ai si pas déjà en HTTPS
+    RewriteCond %{HTTPS} off
     RewriteCond %{HTTP_HOST} ^www\.ivoire\.ai$ [NC]
     RewriteRule ^(.*)$ https://www.ivoire.ai/$1 [L,R=301]
 
