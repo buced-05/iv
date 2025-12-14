@@ -841,11 +841,19 @@ img[src=""].brand-logo {
     color: var(--text-primary);
 }
 
-.badge-text p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin: 0;
-}
+    .badge-text p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .badge-text p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+    }
 
 /* Testimonials Section */
 .testimonials {
@@ -1017,11 +1025,19 @@ img[src=""].brand-logo {
     color: var(--text-primary);
 }
 
-.why-item p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-}
+    .why-item p {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+        .why-item p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding: 0 0.5rem;
+        }
+    }
 
 /* Footer */
 .footer {
@@ -1251,9 +1267,11 @@ img[src=""].brand-logo {
     }
 
     .hero-subtitle {
-        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
         margin-bottom: 2rem;
         padding: 0 1rem;
+        line-height: 1.7;
+        text-align: center;
     }
 
     .hero-buttons {
@@ -1296,8 +1314,10 @@ img[src=""].brand-logo {
     }
 
     .section-subtitle {
-        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
         padding: 0 1rem;
+        line-height: 1.7;
+        text-align: center;
     }
 
     .services-grid {
@@ -1315,8 +1335,9 @@ img[src=""].brand-logo {
     }
 
     .service-description {
-        font-size: 0.9rem;
-        line-height: 1.6;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        text-align: left;
     }
 
     .about-content {
@@ -1324,8 +1345,10 @@ img[src=""].brand-logo {
     }
 
     .about-description {
-        font-size: 0.95rem;
-        line-height: 1.7;
+        font-size: 1rem;
+        line-height: 1.8;
+        text-align: left;
+        margin-bottom: 1.5rem;
     }
 
     .about-features {
@@ -1391,6 +1414,40 @@ img[src=""].brand-logo {
         width: 100%;
         padding: 0 1rem;
     }
+
+    .section-subtitle {
+        font-size: clamp(0.9rem, 4vw, 1rem);
+        line-height: 1.7;
+        padding: 0 0.5rem;
+    }
+
+    .about-description {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        padding: 0 0.5rem;
+    }
+
+    .testimonial-text {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        padding: 0 0.5rem;
+    }
+
+    .why-item p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        padding: 0 0.5rem;
+    }
+
+    .info-text p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .contact-btn {
+        font-size: 0.9rem;
+        padding: 0.875rem 1.25rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1403,15 +1460,29 @@ img[src=""].brand-logo {
     }
 
     .hero-subtitle {
-        font-size: clamp(0.85rem, 4vw, 1rem);
+        font-size: clamp(0.9rem, 4vw, 1rem);
+        line-height: 1.7;
+        padding: 0 0.75rem;
     }
 
     .section-title {
-        font-size: clamp(1.5rem, 8vw, 2rem);
+        font-size: clamp(1.75rem, 8vw, 2rem);
+        line-height: 1.3;
+        margin-bottom: 1rem;
     }
 
     .service-card {
-        padding: 1.25rem;
+        padding: 1.5rem;
+    }
+
+    .service-title {
+        font-size: 1.15rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .service-description {
+        font-size: 0.9rem;
+        line-height: 1.7;
     }
 
     .stat-number {
