@@ -62,6 +62,16 @@
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="https://www.ivoire.ai/sitemap.xml">
     
+    <!-- Additional SEO Meta Tags -->
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Hreflang (pour support multilingue futur) -->
+    <link rel="alternate" hreflang="fr" href="https://www.ivoire.ai/">
+    <link rel="alternate" hreflang="x-default" href="https://www.ivoire.ai/">
+    
     <!-- Favicon (optionnel - supprimé pour éviter les erreurs 404) -->
     <!-- <link rel="icon" type="image/x-icon" href="/favicon.ico"> -->
     <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> -->
@@ -216,12 +226,21 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "IVOIRE.AI",
+        "alternateName": "Ivoire Intelligence Artificielle",
         "url": "https://www.ivoire.ai",
         "description": "IVOIRE.AI - Expert en Intelligence Artificielle en Côte d'Ivoire et en Afrique. Solutions IA sur mesure : Machine Learning, NLP, Chatbot IA, Vision par ordinateur, Deep Learning, IA conversationnelle. Services IA pour entreprises.",
         "inLanguage": "fr-FR",
+        "publisher": {
+            "@type": "Organization",
+            "name": "IVOIRE.AI",
+            "url": "https://www.ivoire.ai"
+        },
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.ivoire.ai/?q={search_term_string}",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://www.ivoire.ai/?q={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
         }
     }
@@ -234,12 +253,33 @@
         "@type": "AggregateRating",
         "itemReviewed": {
             "@type": "Organization",
-            "name": "IVOIRE.AI"
+            "name": "IVOIRE.AI",
+            "@id": "https://www.ivoire.ai"
         },
         "ratingValue": "5",
         "reviewCount": "3",
         "bestRating": "5",
-        "worstRating": "1"
+        "worstRating": "1",
+        "author": {
+            "@type": "Organization",
+            "name": "Clients IVOIRE.AI"
+        }
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema (pour navigation) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Accueil",
+                "item": "https://www.ivoire.ai/"
+            }
+        ]
     }
     </script>
 </head>
