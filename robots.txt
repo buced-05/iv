@@ -5,15 +5,23 @@
 User-agent: *
 Allow: /
 
+# Interdire l'accès aux fichiers de test et documentation uniquement
+Disallow: /docs/
+Disallow: /test-emailjs.html
+Disallow: /diagnostic-emailjs.html
+Disallow: /test-ga.html
+
 # Autoriser spécifiquement Googlebot
 User-agent: Googlebot
 Allow: /
+Disallow: /docs/
+Disallow: /test-emailjs.html
+Disallow: /diagnostic-emailjs.html
+Disallow: /test-ga.html
 
 # Autoriser spécifiquement Bingbot
 User-agent: Bingbot
 Allow: /
-
-# Interdire l'accès aux fichiers de test et documentation
 Disallow: /docs/
 Disallow: /test-emailjs.html
 Disallow: /diagnostic-emailjs.html
