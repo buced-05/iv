@@ -378,7 +378,8 @@ body::after {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
 
 .footer-link {
@@ -506,12 +507,17 @@ body::after {
     
     .footer-content {
         gap: 1rem;
-        flex-direction: row;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center;
+        align-items: center;
     }
     
     .footer-link {
         font-size: 0.75rem;
         padding: 0.4rem 0.8rem;
+        flex-shrink: 0;
+        min-width: auto;
     }
 }
 
@@ -534,12 +540,17 @@ body::after {
     
     .footer-content {
         gap: 0.75rem;
-        flex-direction: row;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center;
+        align-items: center;
     }
     
     .footer-link {
         font-size: 0.7rem;
         padding: 0.35rem 0.7rem;
+        flex-shrink: 0;
+        min-width: auto;
     }
     
     .footer-text {
