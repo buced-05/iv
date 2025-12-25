@@ -506,7 +506,7 @@ body::after {
     
     .footer-content {
         gap: 1rem;
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .footer-link {
@@ -530,6 +530,11 @@ body::after {
     
     .contact-footer {
         padding: 0.5rem 0.75rem;
+    }
+    
+    .footer-content {
+        gap: 0.75rem;
+        flex-direction: row;
     }
     
     .footer-link {
