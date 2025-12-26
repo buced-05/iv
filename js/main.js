@@ -170,7 +170,7 @@ function decodeBase64(str) {
 
 // Encoded contact info
 const encodedPhone = 'KzIyNTA1OTU2MTg5NjQ=';
-const encodedEmail = 'bmV3dGl2MDVAZ21haWwuY29t';
+const encodedEmail = 'c3VwcG9ydEBuZXd0aXYuY29t';
 
 // Call button handler
 function initiateCall(event) {

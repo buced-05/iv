@@ -155,7 +155,7 @@ Ajouter une nouvelle carte dans la section Services (ligne ~345)
 
 ## 📞 Contact
 
-- **Email** : newtiv05@gmail.com
+- **Email** : support@newtiv.com
 - **Téléphone** : +225-05-95-61-89-64
 - **Site web** : https://www.ivoire.ai
 - **Localisation** : Abidjan, Côte d'Ivoire
